@@ -1,0 +1,68 @@
+---
+title: Introduction
+description: Introduction
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Image } from "astro:assets";
+import imgAppEsDark from "../../../../assets/ZanobiJS-App-Es.png";
+
+ZanobiJS is a mini-framework for building server-side applications with NodeJS that are scalable and efficient.
+It uses JavaScript but is built with TypeScript.
+
+It is initially intended for use in clouds such as AWS and Azure. however, it can also be used traditionally.
+
+You will find things similar to [NestJS](https://nestjs.com/) and [Angular](https://angular.io/),
+and it is because ZanobiJS is inspired by those frameworks. However, not everything will be the same.
+
+Finally, ZanobiJS uses [Awilix](https://github.com/jeffijoe/awilix/) which is a container for
+Extremely powerful and effective dependency injection.
+
+### Entities
+
+Within ZanobiJS there are features called entities:
+
+<CardGrid stagger>
+<Card title="Components" icon="document">
+   They process the request and the application response.
+</Card>
+<Card title="Services" icon="add-document">
+   They contain the business logic.
+</Card>
+<Card title="suppliers" icon="open-book">
+   Provide basic data to controllers or services.
+</Card>
+<Card title="Modules" icon="setting">
+     Organize and add entities to the DI container.
+</Card>
+</CardGrid>
+
+
+Each of these has a responsibility and are very important for the functioning of the framework.
+
+### Structure of a small application
+
+In this image you can see in a very superficial way what a small application looks like and how it works.
+
+<Image src={imgAppEsDark} alt="App-Es Dark" />
+
+We see that there is a main module in which the entities are registered. however, there may be other modules in the application.
+
+ZanobiJS can also be modular as this makes it easier to organize and scale.
+
+:::note[Remember]
+* A module can contain another module
+* A driver to a service and/or provider
+* A service to a service and/or provider
+
+But a controller should not contain another controller, nor should services be used from the 
+handler [Handler] or launcher [bootstrap].
+
+The above for good practices.
+:::
+---
+
+### Support us
+
+ZanobiJS is an open source project licensed by MIT. It can grow thanks to the support of amazing people like you.
+If you want to join, read more [here](https://github.com/devdroide/ZanobiJS).

@@ -1,0 +1,73 @@
+---
+title: Providers
+description: Providers
+---
+import { Image } from "astro:assets";
+import imgProviderEsDark from "../../../../assets/ZanobiJS-Provider-Es.png";
+
+Providers are objects that are added to the dependency injection container to be used
+by drivers or services
+
+<Image src={imgProviderEsDark} alt="App-Provider-Es Dark" />
+
+These have 2 properties:
+* provider: It is the name with which it will be used
+* useValue: Value with which it will be used (string, boolean, class, function... etc)
+
+In this example we can see a provider with a numerical value and another that is an instance
+of a class simulating something from AWS
+
+```js title="Example provider in main module"
+import { Module } from "@zanobijs/common";
+import { ControllerExample } from "./example.controller";
+import { ServiceExample } from "./example.service";
+import { AWSExample } from "./aws.service"
+
+@Module({
+  imports: [],
+  controllers: [ControllerExample],
+  services: [ServiceExample, { provider: "API_VALIDATE", useValue: 2 },
+  { provider: "AWSExampleService", useValue: new AWSExample() }],
+  exports: [],
+})
+export class AppModule {}
+```
+In this other part in a controller we see with using the provider which uses
+the `@Inject` decorator with the name given in the main module `API_VALIDATE`
+and the other `AWSExampleService`
+
+```js title="Example provider used in a controller"
+import { Controller, Inject } from "@zanobijs/common";
+import { ServiceExample } from "./example.service";
+import { AWSExample } from "./aws.service";
+
+@Controller()
+export class ControllerExample {
+  constructor(
+    @Inject("API_VALIDATE") private apiValidate: any,
+    @Inject("AWSExampleService") private awsExampleService: AWSExample,
+    private sExample: ServiceExample
+  ) {}
+
+  getHelloService() {
+    return this.sExample.getHello();
+  }
+
+  getAPIValidate() {
+    return this.apiValidate;
+    // return 2
+  }
+
+  getAWS() {
+    return this.awsExampleService.getExample();
+    // return { config: "example", region: "eeuu"  }
+  }
+}
+```
+
+---
+
+### Support us
+
+ZanobiJS is an open source project licensed by MIT. It can grow thanks to the support of amazing people like you.
+If you want to join, read more [here](https://github.com/devdroide/ZanobiJS).

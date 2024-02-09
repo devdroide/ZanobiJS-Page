@@ -1,0 +1,37 @@
+---
+title: Controllers
+description: Controllers
+---
+import { Image } from "astro:assets";
+import imgControllerEsDark from "../../../../assets/ZanobiJS-Controller-Es.png";
+
+Controllers are responsible for applying the necessary logic to the incoming request.
+and to the response that is delivered.
+
+<Image src={imgControllerEsDark} alt="App-Controller-Es Dark" />
+
+:::tip[Did you know this?]
+You should not apply business logic here, that goes to the services 😉
+:::
+
+```js title="Example controller"
+import { Controller } from "@zanobijs/common";
+import { ServiceExample } from "./example.service";
+
+@Controller()
+export class ControllerExample {
+  constructor(
+    private sExample: ServiceExample,
+  ) {}
+
+  getHelloService() {
+    return this.sExample.getHello();
+  }
+}
+```
+---
+
+### Support us
+
+ZanobiJS is an open source project licensed by MIT. It can grow thanks to the support of amazing people like you.
+If you want to join, read more [here](https://github.com/devdroide/ZanobiJS).

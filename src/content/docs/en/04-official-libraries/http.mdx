@@ -1,0 +1,74 @@
+---
+title: HTTP
+description: Librería HTTP
+---
+
+This library allows us to make http requests. Its core is Axios.
+
+### Install
+
+```sh
+npm install @zanobijs/http
+```
+
+### Setting
+
+We add the http module in main module imports
+
+```js
+import { Module } from "@zanobijs/common";
+import { HttpModule } from "@zanobijs/http";
+import { ControllerExample } from "./example.controller";
+import { ServiceExample } from "./example.service";
+@Module({
+  imports: [HttpModule],
+  controllers: [ControllerExample],
+  services: [ServiceExample],
+  exports: [],
+})
+export class AppModule {}
+```
+
+Then we use it in our service
+
+```js
+import { Injectable } from "@zanobijs/common";
+import { HttpClient } from "@zanobijs/http/client";
+
+@Injectable()
+export class ServiceExample {
+  constructor(
+    private httpClient: HttpClient
+  ) {}
+  async getDataAPI(){
+    return await this.httpClient.get(
+      "https://jsonplaceholder.typicode.com/posts/1",
+      {
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        }
+      }
+    );
+  }
+}
+```
+In addition to the above, you can use the `reduceResponse: true` property in the options to
+reduce the answer and get only:
+
+```code
+{
+  status: 200,
+  statusText: 'OK',
+  config: {
+    url: '...',
+    method: 'get',
+    headers: Object [AxiosHeaders] {
+      Accept: '...',
+      Content-Type: '...',
+      'User-Agent': '...',
+      'Accept-Encoding': '...'
+    }
+  },
+  data: {...}
+}
+```
