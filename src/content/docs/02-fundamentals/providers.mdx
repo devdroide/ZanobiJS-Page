@@ -1,0 +1,73 @@
+---
+title: Proveedores
+description: Proveedores
+---
+import { Image } from "astro:assets";
+import imgProviderEsDark from "../../../assets/ZanobiJS-Provider-Es.png";
+
+Los proveedores son unos objetos que se agregan al contenedor de inyección de dependencia para ser usados
+por los controladores o servicios
+
+<Image src={imgProviderEsDark} alt="App-Provider-Es Dark" />
+
+Estos tienen 2 propiedades:
+* provider: Es el nombre con el que será usado
+* useValue: Valor con el que se va usar (string, booleano, clase, funcion... etc)
+
+En este ejemplo podemos ver un proveedor con un valor numérico y otro que es una instancia
+de una clase simulando algo de AWS
+
+```js title="Proveedor de ejemplo en módulo principal"
+import { Module } from "@zanobijs/common";
+import { ControllerExample } from "./example.controller";
+import { ServiceExample } from "./example.service";
+import { AWSExample } from "./aws.service"
+
+@Module({
+  imports: [],
+  controllers: [ControllerExample],
+  services: [ServiceExample, { provider: "API_VALIDATE", useValue: 2 },
+  { provider: "AWSExampleService", useValue: new AWSExample() }],
+  exports: [],
+})
+export class AppModule {}
+```
+En esta otra parte en un controlador vemos con usar el proveedor el cual utiliza
+el decorador `@Inject` con el nombre que se le dio en el módulo principal `API_VALIDATE`
+y el otro `AWSExampleService`
+
+```js title="Proveedor de ejemplo usado en un controlador"
+import { Controller, Inject } from "@zanobijs/common";
+import { ServiceExample } from "./example.service";
+import { AWSExample } from "./aws.service";
+
+@Controller()
+export class ControllerExample {
+  constructor(
+    @Inject("API_VALIDATE") private apiValidate: any,
+    @Inject("AWSExampleService") private awsExampleService: AWSExample,
+    private sExample: ServiceExample
+  ) {}
+
+  getHelloService() {
+    return this.sExample.getHello();
+  }
+
+  getAPIValidate() {
+    return this.apiValidate;
+    // return 2
+  }
+
+  getAWS() {
+    return this.awsExampleService.getExample();
+    // return { config: "example", region: "eeuu"  }
+  }
+}
+```
+
+---
+
+### Apoyanos
+
+ZanobiJS es un proyecto de código abierto con licencia del MIT. Puede crecer gracias al apoyo de personas increíbles como tú.
+Si deseas unirte, lea más [aquí](https://github.com/devdroide/ZanobiJS).
