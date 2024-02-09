@@ -1,0 +1,104 @@
+---
+title: Primeros pasos
+description: Fundamentos de la aplicación
+---
+
+En esta serie de artículos, aprenderá los fundamentos básicos de ZanobiJS. Para familiarizarnos con los
+conceptos básicos de la aplicación, crearemos una aplicación para que puedas observar el potencial
+que tiene este pequeño framework.
+
+### Lenguaje
+
+Estamos encantados de TypeScript y nodeJS. Por eso ZanobiJS está construido bajo esta tecnología y aprovecha las últimas
+funciones del lenguaje para la creación de microservicios.
+
+### Configuración
+
+Configurar un nuevo proyecto es bastante sencillo con ZanobiJS-CLI . Con npm instalado, ejecuta los siguientes comandos
+en su terminal OS:
+
+
+```bash title="Instalando CLI y creando nueva aplicación"
+npm i -g @zanobijs/cli
+zanobijs new nombre_app
+cd nombre_app
+npm install
+```
+
+Esto creará el directorio nombre_app, sub-directorios y varios archivos principales los
+cuales son importantes para su funcionamiento.
+
+```bash title="Estructura de proyecto"
+├── nombre_app
+|  ├── __test__                       // Carpeta las pruebas unitarias
+|  ├── build                          // Carpeta donde se genera el publicación del proyecto
+|  ├── dist                           // Carpeta donde se almacena la transpiación typescript
+|  ├── src                            // Código principal
+|  |  ├── app.module.ts               // Modulo principal en ZanobiJS
+|  |  ├── example.controller.ts       // Controlador de ejemplo en ZanobiJS
+|  |  ├── example.service.ts          // Servicio de ejemplo en ZanobiJS
+|  |  ├── index.ts                    // Archivo principal ZanobiJS
+|  ├── package-lock.json              // Archivo de historial de paquetes instalados
+|  ├── package.json                   // Configuración del proyecto
+|  ├── tsconfig.json                  // Archivo de configuración de typescript
+└── ...
+
+```
+
+En el archivo index.ts contiene una función, que inicia la aplicación
+
+```js title="index.ts aplicación por defecto"
+import { Factory } from "@zanobijs/core";
+import { AppModule } from "./app.module";
+import { ControllerExample } from "./example.controller";
+const factory = new Factory(AppModule);
+const app = factory.create();
+const bootstrap = () => {
+  const controllerExample = app.get<ControllerExample>(
+    "ControllerExample"
+  );
+  console.log(controllerExample.getHelloService());
+}
+bootstrap();
+
+````
+:::note
+ZanobiJS esta enfocado en microservicios y si desea crear una aplicación lambda AWS,
+use el siguiente comando:
+
+```sh title="Creando nueva aplicación tipo lambda de AWS"
+zanobijs new nombre_app --AWSLambda
+```
+:::
+
+```js title="index.ts aplicación tipo Lambda AWS"
+import { Factory } from "@zanobijs/core";
+import { AppModule } from "./app.module";
+import { ControllerExample } from "./example.controller";
+const factory = new Factory(AppModule);
+const app = factory.create();
+
+exports.handler = async (event: any, context: any) => {
+  const controllerExample = app.get<ControllerExample>(
+    "ControllerExample"
+  );
+  console.log(controllerExample.getHelloService());
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify("Hello from lambda")
+  };
+}
+
+````
+
+Para crear una aplicación ZanobiJS, usamos `Factory` que nos facilita la exploración y configuración de las entidades
+usando metadatos. Con el método `create()` se genera el contenedor de inyección de dependencias de la librería `awilix`
+y registra lo encontrado en la exploración. Esto lo podrá ver más adelante en fundamentos
+
+---
+
+### Apoyanos
+
+ZanobiJS es un proyecto de código abierto con licencia del MIT. Puede crecer gracias al apoyo de personas increíbles como tú.
+Si deseas unirte, lea más [aquí](https://github.com/devdroide/ZanobiJS).

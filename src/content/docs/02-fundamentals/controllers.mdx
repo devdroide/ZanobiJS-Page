@@ -1,0 +1,37 @@
+---
+title: Controladores
+description: Controladores
+---
+import { Image } from "astro:assets";
+import imgControllerEsDark from "../../../assets/ZanobiJS-Controller-Es.png";
+
+Los controladores son los encargados de aplicar la lógica necesaria a la petición que ingresa
+y a la respuesta que se entrega.
+
+<Image src={imgControllerEsDark} alt="App-Controller-Es Dark" />
+
+:::tip[¿Sabías esto?]
+No debes aplicar la lógica de negocio aquí, eso va en los servicios 😉
+:::
+
+```js title="Controlador de ejemplo"
+import { Controller } from "@zanobijs/common";
+import { ServiceExample } from "./example.service";
+
+@Controller()
+export class ControllerExample {
+  constructor(
+    private sExample: ServiceExample,
+  ) {}
+
+  getHelloService() {
+    return this.sExample.getHello();
+  }
+}
+```
+---
+
+### Apoyanos
+
+ZanobiJS es un proyecto de código abierto con licencia del MIT. Puede crecer gracias al apoyo de personas increíbles como tú.
+Si deseas unirte, lea más [aquí](https://github.com/devdroide/ZanobiJS).

@@ -1,0 +1,68 @@
+---
+title: Introducción
+description: Introducción
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Image } from "astro:assets";
+import imgAppEsDark from "../../../assets/ZanobiJS-App-Es.png";
+
+ZanobiJS es un marco pequeño para crear aplicaciones del lado del servidor con NodeJS que son escalables y eficientes.
+Utiliza JavaScript pero está construido con TypeScript.
+
+Inicialmente está pensado para usarse en nubes como AWS y Azure. sin embargo, también se puede usar de forma tradicional.
+
+Encontrarás cosas parecidas a [NestJS](https://nestjs.com/) y [Angular](https://angular.io/),
+y es porque ZanobiJS está inspirado en esos framework. sin embargo, no todo será igual.
+
+Por último, ZanobiJS utiliza [Awilix](https://github.com/jeffijoe/awilix/) el cual es contenedor de
+inyección de dependencias extremadamente potente y eficaz.
+
+### Entidades
+
+Dentro de ZanobiJS existen unas características llamadas entidades:
+
+<CardGrid stagger>
+	<Card title="Componentes" icon="document">
+  Procesan la petición y la respuesta la aplicación.
+	</Card>
+	<Card title="Servicios" icon="add-document">
+  Contienen la lógica de negocio.
+	</Card>
+	<Card title="proveedores" icon="open-book">
+  Proveer datos básicos a controladores o servicios.
+	</Card>
+	<Card title="Módulos" icon="setting">
+    Organizar y añadir entidades al contenedor DI.
+	</Card>
+</CardGrid>
+
+
+Cada una de estas tiene una responsabilidad y son muy importantes para el funcionamiento del framework.
+
+### Estructura de una aplicación pequeña
+
+En esta imagen puedes observar de forma muy superficial como es una aplicación pequeña y su funcionamiento
+
+<Image src={imgAppEsDark} alt="App-Es Dark" />
+
+Vemos que existe un módulo principal en el cual se registran las entidades. sin embargo, puede haber otros módulos en la aplicación.
+
+ZanobiJS también puede ser modular ya que esto facilita la organización y el escalamiento.
+
+:::note[Recuerda]
+* Un módulo puede contener otro modulo
+* Un controlador a un servicio y/o proveedor
+* Un servicio a un servicio y/o proveedor
+
+Pero un controlador no debe contener a otro controlador, como tampoco se deben usar los servicios desde el manejador [Handler] o iniciador [bootstrap]. 
+
+Lo anterior por buenas prácticas.
+:::
+
+---
+
+### Apoyanos
+
+ZanobiJS es un proyecto de código abierto con licencia del MIT. Puede crecer gracias al apoyo de personas increíbles como tú.
+Si deseas unirte, lea más [aquí](https://github.com/devdroide/ZanobiJS).

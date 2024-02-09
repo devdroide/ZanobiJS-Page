@@ -1,0 +1,47 @@
+---
+import type { Props } from "@astrojs/starlight/props";
+import CallToAction from "@astrojs/starlight/components/CallToAction.astro";
+const { data } = Astro.props.entry;
+const { title = data.title, tagline, image, actions = [] } = data.hero || {};
+---
+
+<!-- <a href="mailto:houston@example.com">Escríbeme</a> -->
+<div class="h-screen flex items-center">
+  <section class="bg-cover bg-center py-32 w-full bg-image-hero">
+    <div class="container mx-auto text-left text-white">
+      <div class="flex items-center">
+        <div class="w-1/2">
+          <!-- <h1 class="text-5xl font-medium mb-6">Welcome to My Agency</h1> -->
+          <h1
+            class="text-5xl font-medium mb-6"
+            data-page-title
+            set:html={title}
+          />
+          <p class="text-xl mb-12">
+            {tagline}
+          </p>
+          {
+            actions.length > 0 && (
+              <div class="sl-flex gap-2 flex-wrap">
+                {actions.map(({ text, ...attrs }) => (
+                  <CallToAction {...attrs} set:html={text} />
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .bg-image-hero {
+    background-image: url("../assets/background.png");
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #090909;
+    background-attachment: fixed;
+  }
+</style>
