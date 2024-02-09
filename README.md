@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Starlight Starter Kit: Basics
 
 [![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
@@ -52,3 +53,7 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+=======
+# ZanobiJS-Site
+A Node.js mini-framework for building small, efficient, scalable, and enterprise-grade server-side microservices with TypeScript/JavaScript.
+>>>>>>> 93b798b4b1ce90f7030f2592873212e0b6813003
