@@ -7,11 +7,11 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "ZanobiJS",
-      favicon: "./src/assets/logo.png",
+      favicon: "/src/assets/logo.png",
       logo: {
-        src: "./src/assets/logo.png",
+        src: "/src/assets/logo.png",
       },
-      customCss: ["./src/tailwind/tailwind.css"],
+      customCss: ["/src/tailwind/tailwind.css"],
       social: {
         github: "https://github.com/devdroide/ZanobiJS",
       },
