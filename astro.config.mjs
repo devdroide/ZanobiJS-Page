@@ -4,14 +4,13 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "zanobijs.github.io",
+  site: "https://zanobijs.github.io",
   integrations: [
     starlight({
       title: "ZanobiJS",
       favicon: "./src/assets/logo.png",
       logo: {
         src: "./src/assets/logo.png",
-        // replacesTitle: true,
       },
       customCss: ["./src/tailwind/tailwind.css"],
       social: {
