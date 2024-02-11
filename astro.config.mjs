@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
 
-import vercel from '@astrojs/vercel/static';
+import vercel from "@astrojs/vercel/serverless";
 
 // https://astro.build/config
 export default defineConfig({
@@ -156,6 +156,6 @@ export default defineConfig({
     }),
     tailwind(),
   ],
-  output: "static",
+  output: "server",
   adapter: vercel(),
 });
