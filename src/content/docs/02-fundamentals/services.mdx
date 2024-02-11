@@ -1,0 +1,39 @@
+---
+title: Servicios
+description: Servicios
+---
+import { Image } from "astro:assets";
+import imgServiceEsDark from "../../../assets/ZanobiJS-Service-Es.png";
+
+Los servicios son parte importante de nuestro framework y están diseñados para que se puedan inyectar como una dependencia.
+
+<Image src={imgServiceEsDark} alt="App-Service-Es Dark" />
+
+### Inyección de dependencia
+
+ZanobiJS se basa un patrón de diseño conocido como **inyección de dependencia**. Gracias a
+[Awilix](https://github.com/jeffijoe/awilix/) el contenedor de dependencias se puede administrar de forma rápida,
+eficiente y potente.
+
+```js title="Servicio de ejemplo"
+import { Injectable } from "@zanobijs/common";
+
+@Injectable()
+export class ServiceExample {
+  constructor() {}
+  getHello() {
+    return "Hello ServiceExample";
+  }
+}
+```
+En el siguiente ejemplo, vemos con se resuelve esa dependencia dentro del constructor de un controlador.
+
+```js title="Ejemplo de constructor de un controlador"
+constructor(private sExample: ServiceExample) {}
+```
+---
+
+### Apoyanos
+
+ZanobiJS es un proyecto de código abierto con licencia del MIT. Puede crecer gracias al apoyo de personas increíbles como tú.
+Si deseas unirte, lea más [aquí](https://github.com/devdroide/ZanobiJS).

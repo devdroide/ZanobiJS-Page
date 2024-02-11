@@ -1,0 +1,189 @@
+---
+title: Uso
+description: Uso de CLI
+---
+
+### Crear una nueva aplicación
+
+Crea una aplicación estándar o de uso tradicional
+
+```sh
+zanobijs new <nombre_aplicación> [opciones]
+## con alias
+zanobijs n <nombre_aplicación> [opciones]
+```
+
+Al realizar este comando crea una carpeta con el nombre de la aplicación y crea
+todos los archivos necesarios para su funcionamiento
+
+#### Argumentos
+
+<table>
+  <tr>
+    <td>Argumento</td>
+    <td>Descripción</td>
+  </tr>
+  <tr>
+    <td>**`<nombre_aplicación>`**</td>
+    <td>Nombre de la aplicación</td>
+  </tr>
+</table>
+
+#### opciones
+
+<table>
+  <tr>
+    <td>Opción</td>
+    <td>Descripción</td>
+  </tr>
+  <tr>
+    <td>**`--AWSlambda`**</td>
+    <td>Crea una aplicación con una estructura para una lambda de AWS</td>
+  </tr>
+</table>
+
+### Generar entidades
+
+Genera las entidades para ser usadas en la aplicación
+
+```sh
+zanobijs generate <entidad> [nombre] <valor_proveedor>
+## con alias
+zanobijs g <entidad> [nombre] <valor_proveedor>
+```
+
+Al ejecutar este comando se genera un archivo según la entidad y la ruta especificada
+
+#### Argumentos
+
+<table>
+  <tr>
+    <td>Argumento</td>
+    <td>Descripción</td>
+  </tr>
+  <tr>
+    <td>`entidad`</td>
+    <td>Entidad a generar</td>
+  </tr>
+  <tr>
+    <td>`nombre`</td>
+    <td>Nombre de la entidad</td>
+  </tr>
+  <tr>
+    <td>`valor_proveedor`</td>
+    <td>Valor que se le dará a un proveedor</td>
+  </tr>
+</table>
+
+#### Entidades
+
+<table>
+  <tr>
+    <td>Entidades</td>
+    <td>alias</td>
+    <td>Comando de ejemplo</td>
+  </tr>
+  <tr>
+    <td>`controller`</td>
+    <td>c</td>
+    <td>
+    ```sh
+      zanobijs g c src/controlador/miControlador
+    ```
+    </td>
+  </tr>
+  <tr>
+    <td>`service`</td>
+    <td>s</td>
+    <td>
+    ```sh
+      zanobijs g s src/servicio/miServicio
+    ```
+    </td>
+  </tr>
+  <tr>
+    <td>`provider`</td>
+    <td>p</td>
+    <td>
+    ```sh
+      zanobijs g p src/servicio/PROVEEDOR_EJEMPLO '3'
+    ```
+    </td>
+  </tr>
+  <tr>
+    <td>`module`</td>
+    <td>m</td>
+    <td>
+    ```sh
+      zanobijs g m src/funcionalidad/miModulo
+    ```
+    </td>
+  </tr>
+</table>
+
+### Construir una aplicación
+
+Genera un zip de la aplicación listo para distribución con una configuración por defecto.
+
+```sh
+zanobijs build
+```
+
+#### Personalización de construcción de la aplicación
+
+Se puede realizar una configuración diferente agregando en el `package.json` de la aplicación
+la siguiente propiedad:
+
+```json
+...
+"zanobiJSBuildConfig": {
+    "buildName": "salida/output/MiAppNode.zip",
+    "files": [
+      {
+        "source": "package.json",
+        "destination": "packageZNB.json"
+      }
+    ],
+    "folders": [
+      {
+        "source": "dist",
+        "destination": "code"
+      },
+      {
+        "source": "node_modules",
+        "destination": "nodeModules"
+      }
+    ]
+  }
+  ...
+```
+
+<table>
+  <tr>
+    <td>Propiedad</td>
+    <td>Descripción</td>
+  </tr>
+  <tr>
+    <td>`buildName`</td>
+    <td>Nombre del zip para la distribución</td>
+  </tr>
+  <tr>
+    <td>`files`</td>
+    <td>Archivos que se desean agregar</td>
+  </tr>
+  <tr>
+    <td>`folders`</td>
+    <td>Carpetas que se desean agregar</td>
+  </tr>
+</table>
+
+:::tip[¿Sabías esto?]
+Puedes renombrar archivos y carpetas usando la propiedad `destination` 😉
+:::
+
+---
+
+### Apoyanos
+
+ZanobiJS es un proyecto de código abierto con licencia del MIT. Puede crecer gracias al apoyo de personas increíbles como tú.
+Si deseas unirte, lea más [aquí](https://github.com/devdroide/ZanobiJS).

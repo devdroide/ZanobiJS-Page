@@ -1,0 +1,63 @@
+---
+title: Modules
+description: Modules
+---
+import { Image } from "astro:assets";
+import imgModuleEsDark from "../../../../assets/ZanobiJS-Module-Simple-En.png";
+
+Module is a class that is decorated with `@Module`. The decorator provides metadata that
+They will be used for dependency injection with the library **@zanobijs/core**
+
+In the application there will always be a module that is the main one, however, they can be created and used
+other modules that allow the application to be better structured and organized.
+
+<Image src={imgModuleEsDark} alt="App-Module-En Dark" />
+
+The `@Module` decorator has the following structure:
+
+| **Entity**  | **Description**                                                                        |
+|-------------|----------------------------------------------------------------------------------------|
+| imports     | Importing other modules |
+| controllers | Set of drivers that are defined for the module |
+| services    | Set of services or providers that will be instantiated for use in controllers |
+| exports     | The sets of services that will be available for use in other modules |
+
+```js title="Módulo principal de ejemplo"
+import { Module } from "@zanobijs/common";
+import { ControllerZ } from "./Z.controller";
+import { ServiceA } from "./A.service";
+import { ModuleUser } from "./user.module";
+
+@Module({
+  imports: [ModuleUser],
+  controllers: [ControllerZ],
+  services: [ServiceA],
+  exports: [],
+})
+export class AppModule {}
+
+```
+
+
+```js title="Módulo usuario de ejemplo"
+import { Module } from "@zanobijs/common";
+import { ControllerA } from "./A.controller";
+import { ServiceB } from "./B.service";
+
+@Module({
+  imports: [],
+  controllers: [ControllerA],
+  services: [ServiceB],
+  exports: [ServiceB],
+})
+export class ModuleUser {}
+
+```
+
+---
+
+### Support us
+
+ZanobiJS is an open source project licensed by MIT. It can grow thanks to the support of amazing people like you.
+If you want to join, read more [here](https://github.com/devdroide/ZanobiJS).
+

@@ -1,0 +1,189 @@
+---
+title: Usage
+description: Usage of CLI
+---
+
+### Create a new application
+
+Create a standard or traditional application
+
+```sh
+zanobijs new <app_name> [options]
+## with alias
+zanobijs n <app_name> [options]
+```
+
+By performing this command, create a folder with the name of the application and create
+all the files necessary for its operation
+
+#### Arguments
+
+<table>
+   <tr>
+     <td>Argument</td>
+     <td>Description</td>
+   </tr>
+   <tr>
+     <td>**`<app_name>`**</td>
+     <td>Application name</td>
+   </tr>
+</table>
+
+#### options
+
+<table>
+   <tr>
+     <td>Option</td>
+     <td>Description</td>
+   </tr>
+   <tr>
+     <td>**`--AWSlambda`**</td>
+     <td>Create an application with a framework for an AWS lambda</td>
+   </tr>
+</table>
+
+### Generate entities
+
+Generate the entities to be used in the application
+
+```sh
+zanobijs generate <entity> [name] <provider_value>
+## with alias
+zanobijs g <entity> [name] <provider_value>
+```
+
+Running this command generates a file based on the entity and the specified path
+
+#### Arguments
+
+<table>
+   <tr>
+     <td>Argument</td>
+     <td>Description</td>
+   </tr>
+   <tr>
+     <td>`entity`</td>
+     <td>Entity to generate</td>
+   </tr>
+   <tr>
+     <td>`name`</td>
+     <td>Entity name</td>
+   </tr>
+   <tr>
+     <td>`provider_value`</td>
+     <td>Value to be given to a provider</td>
+   </tr>
+</table>
+
+#### Entities
+
+<table>
+   <tr>
+     <td>Entities</td>
+     <td>alias</td>
+     <td>Example command</td>
+   </tr>
+   <tr>
+     <td>`controller`</td>
+     <td>c</td>
+     <td>
+     ```sh
+       zanobijs g c src/controller/myController
+     ```
+     </td>
+   </tr>
+   <tr>
+     <td>`service`</td>
+     <td>s</td>
+     <td>
+     ```sh
+       zanobijs g s src/service/myService
+     ```
+     </td>
+   </tr>
+   <tr>
+     <td>`provider`</td>
+     <td>p</td>
+     <td>
+     ```sh
+       zanobijs g p src/service/PROVIDER_EXAMPLE '3'
+     ```
+     </td>
+   </tr>
+   <tr>
+     <td>`module`</td>
+     <td>m</td>
+     <td>
+     ```sh
+       zanobijs g m src/functionality/myModule
+     ```
+     </td>
+   </tr>
+</table>
+
+### Build an application
+
+Generates a zip of the application ready for distribution with default configuration.
+
+```sh
+zanobijs build
+```
+
+#### App build customization
+
+Different configuration can be done by adding in the `package.json` of the application
+the following property:
+
+```json
+...
+"zanobiJSBuildConfig": {
+    "buildName": "salida/output/MiAppNode.zip",
+    "files": [
+      {
+        "source": "package.json",
+        "destination": "packageZNB.json"
+      }
+    ],
+    "folders": [
+      {
+        "source": "dist",
+        "destination": "code"
+      },
+      {
+        "source": "node_modules",
+        "destination": "nodeModules"
+      }
+    ]
+  }
+  ...
+```
+
+<table>
+   <tr>
+     <td>Property</td>
+     <td>Description</td>
+   </tr>
+   <tr>
+     <td>`buildName`</td>
+     <td>Name of the zip for the distribution</td>
+   </tr>
+   <tr>
+     <td>`files`</td>
+     <td>Files to add</td>
+   </tr>
+   <tr>
+     <td>`folders`</td>
+     <td>Folders to add</td>
+   </tr>
+</table>
+
+:::tip[Did you know this?]
+You can rename files and folders using the `destination` property 😉
+:::
+
+---
+
+### Support us
+
+ZanobiJS is an open source project licensed by MIT. It can grow thanks to the support of amazing people like you.
+If you want to join, read more [here](https://github.com/devdroide/ZanobiJS).

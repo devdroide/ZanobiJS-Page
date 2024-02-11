@@ -1,0 +1,60 @@
+---
+title: ZanobiJS
+description: ZanobiJS
+---
+import { Image } from "astro:assets";
+import imgFundamentalsAppEs from "../../../../assets/ZanobiJS-Fundamentals-En.png";
+
+The mini-framework is composed of 2 main dependencies:
+
+1. @zanobijs/core
+2. @zanobijs/common
+
+<Image src={imgFundamentalsAppEs} alt="App-fundamentals-En" />
+
+### ZanobiJS Common
+
+Here we will find the decorators that record the information of the classes in the metadata,
+in order to be able to add them to the dependency injection container later.
+
+```js
+import { Controller } from "@zanobijs/common";
+@Controller()
+export class ControllerExample {...}
+```
+
+```js
+import { Injectable } from "@zanobijs/common";
+@Injectable()
+export class ServiceExample {...}
+```
+
+### ZanobiJS Core
+
+In this dependency we are going to find the factory that is responsible for executing an injector, this searches
+Within the metadata the entities are going to be injected for.
+
+It then creates the dependency injection container and registers the entities found.
+
+Finally, after creating an application from the factory in the index.ts it gets the entity
+through the [get] method that generates a request and the container resolves it.
+
+```js
+import { Factory } from "@zanobijs/core";
+import { AppModule } from "./app.module";
+import { ControllerExample } from "./example.controller";
+const factory = new Factory(AppModule);
+const app = factory.create();
+const controllerExample = app.get<ControllerExample>(
+  "ControllerExample"
+);
+console.log(controllerExample.getHelloService());
+// "Hello from services"
+```
+
+---
+
+### Support us
+
+ZanobiJS is an open source project licensed by MIT. It can grow thanks to the support of amazing people like you.
+If you want to join, read more [here](https://github.com/devdroide/ZanobiJS).

@@ -1,0 +1,63 @@
+---
+title: Módulos
+description: Módulos
+---
+import { Image } from "astro:assets";
+import imgModuleEsDark from "../../../assets/ZanobiJS-Module-Simple-Es.png";
+
+El módulo es una clase que está decorada con `@Module`. El decorador proporciona unos metadatos que
+serán utilizados para inyección de dependencias con la librería **@zanobijs/core**
+
+En la aplicación siempre habrá un módulo que es el principal, sin embargo, se pueden crear y utilizar
+otros módulos que permitan estructurar y organizar mejor la aplicación.
+
+<Image src={imgModuleEsDark} alt="App-Module-Es Dark" />
+
+El decorador `@Module` tiene la siguiente estructura:
+
+| **Entidad** | **Descripción**                                                                         |
+|-------------|-----------------------------------------------------------------------------------------|
+| imports     | Importación de otros módulos                                                            |
+| controllers | Conjunto de controladores que están definidos para el módulo                            |
+| services    | Conjunto de servicios o proveedores que serán instanciados para el uso en controladores |
+| exports     | Los conjuntos de servicios que estarán disponibles para el uso en otros módulos         |
+
+```js title="Módulo principal de ejemplo"
+import { Module } from "@zanobijs/common";
+import { ControllerZ } from "./Z.controller";
+import { ServiceA } from "./A.service";
+import { ModuleUser } from "./user.module";
+
+@Module({
+  imports: [ModuleUser],
+  controllers: [ControllerZ],
+  services: [ServiceA],
+  exports: [],
+})
+export class AppModule {}
+
+```
+
+
+```js title="Módulo usuario de ejemplo"
+import { Module } from "@zanobijs/common";
+import { ControllerA } from "./A.controller";
+import { ServiceB } from "./B.service";
+
+@Module({
+  imports: [],
+  controllers: [ControllerA],
+  services: [ServiceB],
+  exports: [ServiceB],
+})
+export class ModuleUser {}
+
+```
+
+---
+
+### Apoyanos
+
+ZanobiJS es un proyecto de código abierto con licencia del MIT. Puede crecer gracias al apoyo de personas increíbles como tú.
+Si deseas unirte, lea más [aquí](https://github.com/devdroide/ZanobiJS).
+
