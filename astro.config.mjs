@@ -7,9 +7,9 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "ZanobiJS",
-      favicon: "./src/assets/logo200.png",
+      favicon: "./src/assets/logo200.svg",
       logo: {
-        src: "./src/assets/logo200.png",
+        src: "./src/assets/logo200.svg",
       },
       customCss: ["/src/tailwind/tailwind.css"],
       social: {
