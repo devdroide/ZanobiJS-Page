@@ -4,6 +4,7 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "zanobijs.github.io",
   integrations: [
     starlight({
       title: "ZanobiJS",
