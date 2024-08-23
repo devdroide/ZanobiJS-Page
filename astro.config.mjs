@@ -1,112 +1,151 @@
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
+import { defineConfig } from "astro/config";
+import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "zanobijs.github.io",
   integrations: [
     starlight({
       title: "ZanobiJS",
-      favicon: "./src/assets/logo.png",
+      favicon: "./src/assets/logo200.svg",
       logo: {
-        src: "./src/assets/logo.png",
-        // replacesTitle: true,
+        src: "./src/assets/logo200.svg",
       },
-      customCss: ["./src/tailwind/tailwind.css"],
+      customCss: ["/src/tailwind/tailwind.css"],
       social: {
         github: "https://github.com/devdroide/ZanobiJS",
       },
       sidebar: [
         {
           label: "¿Cómo Empezar?",
-          translations: { en: "Getting Started" },
+          translations: {
+            en: "Getting Started",
+          },
           items: [
             {
               label: "Instalación",
-              translations: { en: "Install" },
+              translations: {
+                en: "Install",
+              },
               link: "/01-getting-started/install/",
             },
             {
               label: "Primeros Pasos",
-              translations: { en: "First steps" },
+              translations: {
+                en: "First steps",
+              },
               link: "/01-getting-started/first-step/",
             },
           ],
         },
         {
           label: "Fundamentos",
-          translations: { en: "Fundamentals" },
+          translations: {
+            en: "Fundamentals",
+          },
           items: [
             {
               label: "Introducción",
-              translations: { en: "Introduction" },
+              translations: {
+                en: "Introduction",
+              },
               link: "/02-fundamentals/introduction/",
             },
             {
               label: "ZanobiJS",
-              translations: { en: "ZanobiJS" },
+              translations: {
+                en: "ZanobiJS",
+              },
               link: "/02-fundamentals/zanobijs/",
             },
             {
               label: "Módulos",
-              translations: { en: "Modules" },
+              translations: {
+                en: "Modules",
+              },
               link: "/02-fundamentals/modules/",
             },
             {
               label: "Controladores",
-              translations: { en: "Controllers" },
+              translations: {
+                en: "Controllers",
+              },
               link: "/02-fundamentals/controllers/",
             },
             {
               label: "Servicios",
-              translations: { en: "Services" },
+              translations: {
+                en: "Services",
+              },
               link: "/02-fundamentals/services/",
             },
             {
               label: "Proveedores",
-              translations: { en: "Providers" },
+              translations: {
+                en: "Providers",
+              },
               link: "/02-fundamentals/providers/",
+            },
+            {
+              label: "Registro en consola",
+              translations: {
+                en: "Logger user",
+              },
+              link: "/02-fundamentals/logger/",
             },
           ],
         },
         {
           label: "CLI",
-          translations: { en: "CLI" },
+          translations: {
+            en: "CLI",
+          },
           items: [
             // Each item here is one entry in the navigation menu.
             {
               label: "Descripción General",
-              translations: { en: "Overview" },
+              translations: {
+                en: "Overview",
+              },
               link: "/03-cli/overview/",
             },
             {
               label: "Uso",
-              translations: { en: "Usage" },
+              translations: {
+                en: "Usage",
+              },
               link: "/03-cli/usage/",
             },
           ],
         },
         {
           label: "Librerías oficiales",
-          translations: { en: "Official Libraries" },
+          translations: {
+            en: "Official Libraries",
+          },
           items: [
             // Each item here is one entry in the navigation menu.
             {
               label: "HTTP",
-              translations: { en: "HTTP" },
+              translations: {
+                en: "HTTP",
+              },
               link: "/04-official-libraries/http/",
             },
             {
               label: "AWS",
-              translations: { en: "AWS" },
+              translations: {
+                en: "AWS",
+              },
               link: "/04-official-libraries/aws/",
             },
           ],
         },
         {
           label: "Apoyanos",
-          translations: { en: "Support us" },
+          translations: {
+            en: "Support us",
+          },
           link: "/05-support-us/supportus/",
         },
       ],
