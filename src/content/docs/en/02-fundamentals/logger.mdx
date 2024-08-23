@@ -1,0 +1,98 @@
+---
+title: Logger User
+description: logger in console
+---
+
+As a developer, you can use the service offered by ZanobiJS to print information to the console.
+
+There are two types of console prints:
+1. Framework debug prints.
+2. User-decided prints.
+
+To activate these, you need to include the factory options:
+
+```js title="index.ts"
+const factory = new Factory(AppModule, {
+  activeLoggerSystem: true,
+  activeLoggerUser: true,
+});
+```
+When we enable **activeLoggerSystem**, it allows the printing of the debug logs that the framework makes internally.
+
+Meanwhile, **activeLoggerUser** allows enabling the debugging that the user decides to display in the console.
+
+```js title="Example information logger"
+import { Injectable } from "@zanobijs/common";
+import { LoggerUser } from "@zanobijs/common/utils";
+const logUSer = LoggerUser();
+
+@Injectable()
+export class ServiceExample {
+  constructor() {}
+  getHello(): void {
+    logUSer.success("Lorem ipsum success");
+    logUSer.info("Lorem ipsum info");
+    logUSer.warn("Lorem ipsum warn");
+    logUSer.error("Lorem ipsum error");
+    logUSer.debug("Lorem ipsum debug");
+    logUSer.important("Lorem important");
+  }
+  // ***** PRINT *****
+  // [SUCCESS]: Lorem ipsum success     <prints on console with green color>
+  // [INFO]: Lorem ipsum info           <prints on console with blue color>
+  // [WARN]: Lorem ipsum warn           <prints on console with yellow color>
+  // [ERROR]: Lorem ipsum error         <prints on console with red color>
+  // [DEBUG]: Lorem ipsum debug         <prints on console with white color>
+  // [IMPORTANT]: Lorem important       <prints on console with red background>
+}
+```
+### Printing with or without color
+
+:::note
+It's important to note that, by default, printing is done with colors, which may not work well in AWS CloudWatch. It is suggested to disable it, as the color codes can hinder the readability of the logs.
+:::
+
+```js title="without color"
+const logUser = LoggerUser({ withColor: false });
+```
+
+### Injecting the logger
+
+You can also inject the logger to be used in controllers or services within the application.
+
+```js title="Example main module"
+import { Module } from "@zanobijs/common";
+import { ServiceA } from "./A.service";
+
+@Module({
+  imports: [],
+  controllers: [],
+  services: [
+    ServiceA,
+    { provider: "LOG", useValue: LoggerUser( { withColor: false })},
+    // Remember, if you want the print to be in color, use LoggerUser()
+    // Without options or LoggerUser({ withColor: true }), as you prefer
+  ],
+  exports: [],
+})
+export class AppModule {}
+```
+
+```js title="Example service"
+import { Injectable, ILoggerService } from "@zanobijs/common";
+
+@Injectable()
+export class ServiceA {
+  constructor(@Inject("LOG") private log: ILoggerService) {}
+
+  getHello() {
+    this.log.success("print me log", { test: "some" });
+    // Remember that the console print will be without colors { withColor: false }
+    return "Hello ServiceExample";
+  }
+}
+```
+
+### Support us
+
+ZanobiJS is an open source project licensed by MIT. It can grow thanks to the support of amazing people like you. If you want to join, read more [here](https://github.com/devdroide/ZanobiJS).
