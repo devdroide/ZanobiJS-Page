@@ -1,0 +1,104 @@
+---
+title: Registro en consola
+description: Registro de información en consola
+---
+
+Como desarrollador puedes hacer el uso del servicio que ofrece ZanobiJS para realizar
+la impresion de información en la consola.
+
+Existen 2 tipo de impresiones en consola:
+1. Impresiones de depuración del framework.
+2. Impresiones que el usuario decide hacer.
+
+Para activar debes incluir las opciones de factory:
+
+```js title="index.ts"
+const factory = new Factory(AppModule, {
+  activeLoggerSystem: true,
+  activeLoggerUser: true,
+});
+```
+cuando activamos **activeLoggerSystem** permite la impresion de los registros de depuración que
+el framework hace internamente.
+
+mientras **activeLoggerUser** permite activar la depuración que el usuario decide mostrar en consola
+
+```js title="Registro de información de ejemplo"
+import { Injectable } from "@zanobijs/common";
+import { LoggerUser } from "@zanobijs/common/utils";
+const logUser = LoggerUser();
+
+@Injectable()
+export class ServiceExample {
+  constructor() {}
+  getHello(): void {
+    logUser.success("Lorem ipsum success");
+    logUser.info("Lorem ipsum info");
+    logUser.warn("Lorem ipsum warn");
+    logUser.error("Lorem ipsum error");
+    logUser.debug("Lorem ipsum debug");
+    logUser.important("Lorem important");
+  }
+  // ***** PRINT *****
+  // [SUCCESS]: Lorem ipsum success     <Imprime en consola con color Verde>
+  // [INFO]: Lorem ipsum info           <Imprime en consola con color Azul>
+  // [WARN]: Lorem ipsum warn           <Imprime en consola con color Amarillo>
+  // [ERROR]: Lorem ipsum error         <Imprime en consola con color Rojo>
+  // [DEBUG]: Lorem ipsum debug         <Imprime en consola con color Blanco>
+  // [IMPORTANT]: Lorem important      <Imprime en consola con Fondo rojo>
+}
+```
+
+### Impresión con o sin color
+
+:::note
+Es importante tener en cuenta que por defecto tiene impresión con colores y esto no funciona
+en cloudwatch de AWS por lo tanto se sugiere desactivarlo ya que los códigos de color impiden
+tener una buena legibilidad del registro.
+:::
+
+```js title="Sin color"
+const logUser = LoggerUser({ withColor: false });
+```
+
+### Inyectando el registro de consola
+
+También puede inyectar el registro para ser usado en controladores o servicios dentro de la aplicación
+
+```js title="Módulo principal de ejemplo"
+import { Module } from "@zanobijs/common";
+import { ServiceA } from "./A.service";
+
+@Module({
+  imports: [],
+  controllers: [],
+  services: [
+    ServiceA,
+    { provider: "LOG", useValue: LoggerUser( { withColor: false })},
+    // Recuerde si quiere que la impresión salga con colores debe usar LoggerUser()
+    // Sin opciones o LoggerUser( { withColor: true }) como prefiera
+  ],
+  exports: [],
+})
+export class AppModule {}
+```
+
+```js title="Servicio de ejemplo"
+import { Injectable, ILoggerService } from "@zanobijs/common";
+
+@Injectable()
+export class ServiceA {
+  constructor(@Inject("LOG") private log: ILoggerService) {}
+
+  getHello() {
+    this.log.success("print me log", { test: "some" });
+    // Recuerde que la impresion en consola saldra sin colores { withColor: false }
+    return "Hello ServiceExample";
+  }
+}
+```
+
+### Apoyanos
+
+ZanobiJS es un proyecto de código abierto con licencia del MIT. Puede crecer gracias al apoyo de personas increíbles como tú.
+Si deseas unirte, lea más [aquí](https://github.com/devdroide/ZanobiJS).

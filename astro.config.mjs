@@ -86,6 +86,13 @@ export default defineConfig({
               },
               link: "/02-fundamentals/providers/",
             },
+            {
+              label: "Registro en consola",
+              translations: {
+                en: "Logger user",
+              },
+              link: "/02-fundamentals/logger/",
+            },
           ],
         },
         {
